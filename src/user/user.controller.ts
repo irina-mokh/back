@@ -21,7 +21,6 @@ import * as bcrypt from 'bcrypt';
 export const USER_ID = '1';
 
 @Controller('user')
-@UseGuards(AuthGuard)
 export class UserController {
   constructor(private service: UserService) {}
 
@@ -36,7 +35,7 @@ export class UserController {
     if (!item) throw new NotFoundException(`Not found.`);
     return item;
   }
-
+  @UseGuards(AuthGuard)
   @HttpCode(204)
   @Delete(':id')
   async delete(@Param('id', ParseUUIDPipe) id: string) {
@@ -51,6 +50,7 @@ export class UserController {
     return this.service.create(dto);
   }
 
+  @UseGuards(AuthGuard)
   @Put(':id')
   async updatePass(
     @Param('id', ParseUUIDPipe) id: string,
