@@ -8,6 +8,7 @@ import {
   Param,
   ParseUUIDPipe,
   Post,
+  Query,
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
@@ -15,14 +16,14 @@ import { CategoryService } from './category.service';
 import { CreateCatDto as C } from './category.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
 
-export const USER_ID = '1';
+// export const USER_ID = '1';
 
 @Controller('category')
 export class CategoryController {
   constructor(private service: CategoryService) {}
 
   @Get()
-  getAll(@Param('userId', ParseUUIDPipe) userId: string) {
+  getAll(@Query('userId', ParseUUIDPipe) userId: string) {
     return this.service.getAll(userId);
   }
 

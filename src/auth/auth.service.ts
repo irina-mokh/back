@@ -25,7 +25,10 @@ export class AuthService {
 
   async login(user: UserDto) {
     const { id, email } = user;
-    return this.getTokens({ userId: id, login: email });
+    return {
+      ...this.getTokens({ userId: id, login: email }),
+      user: await this.userService.getByEmail(email),
+    };
   }
 
   async validUser({ email, password }: CreateUserDto) {

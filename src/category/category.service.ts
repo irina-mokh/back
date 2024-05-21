@@ -23,9 +23,16 @@ export class CategoryService {
 
   async create(dto: C) {
     this.logger.log(`Create category with data: ${JSON.stringify(dto)}`);
+    const { userId, ...rest } = dto;
+
     const item = await this.db.category.create({
       data: {
-        ...dto,
+        ...rest,
+        user: {
+          connect: {
+            id: userId,
+          },
+        },
       },
     });
     return {
