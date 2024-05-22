@@ -5,7 +5,7 @@ export class CatDto {
   id: string; // uuid v4
   name: string;
   type: string;
-  start: number;
+  balance: number;
   @IsUUID()
   userId: string;
 }
@@ -20,7 +20,7 @@ export class CreateCatDto {
   type: string;
 
   @IsNumber()
-  start: number;
+  balance: number;
 
   @IsUUID()
   userId: string;
