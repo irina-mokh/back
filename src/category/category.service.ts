@@ -12,7 +12,17 @@ export class CategoryService {
   }
 
   async getAll(userId: string) {
-    return await this.db.category.findMany({ where: { userId } });
+    return await this.db.category.findMany({
+      where: { userId },
+      include: {
+        actionsIn: {
+          select: { id: true },
+        },
+        actionsOut: {
+          select: { id: true },
+        },
+      },
+    });
   }
 
   async getById(id: string) {
